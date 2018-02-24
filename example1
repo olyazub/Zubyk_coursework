@@ -1,0 +1,16 @@
+import requests
+import beautifulsoup4
+
+def parse_data(url):
+    r = requests.get(url)
+    soup = beautifulsoup4(r.text, 'html.parser')
+    books = soup.select(".vsl-bookstore-item")
+    names = [book.select('.vsl-catalogue-item-name a')[0].contents[0].strip() for book in books]
+    images = [int(book.select('.vsl-img a img')[0].contents[0].strip().split()[0]) for book in books]
+    infos = list(zip(names, images))
+    return infos
+
+boooks= []
+for i in range(1, 38):
+    url = "https://starylev.com.ua/bookstore/page--{}".format(i)
+    boooks += parse_data(url)
