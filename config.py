@@ -1,0 +1,1 @@
+DB_PATH = "sqlite:///C:/Users/Admin/PycharmProjects/books/all_books_9є.db"
